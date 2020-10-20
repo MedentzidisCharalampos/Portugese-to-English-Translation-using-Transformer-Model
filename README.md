@@ -83,54 +83,51 @@ The transformer model:
 1. The input sentence is passed through N encoder layers that generates an output for each word/token in the sequence.
 2. The decoder attends on the encoder's output and its own input (self-attention) to predict the next word.
 
-Encoder layer
+# Encoder layer
 Each encoder layer consists of sublayers:
 
-Multi-head attention (with padding mask)
-Point wise feed forward networks.
-Each of these sublayers has a residual connection around it followed by a layer normalization. Residual connections help in avoiding the vanishing gradient problem in deep networks.
+1. Multi-head attention (with padding mask).
+2. Point wise feed forward networks.
 
-The output of each sublayer is LayerNorm(x + Sublayer(x)). The normalization is done on the d_model (last) axis. There are N encoder layers in the transformer.
+Each of these sublayers has a residual connection around it followed by a layer normalization. Residual connections help in avoiding the vanishing gradient problem in deep networks. There are N encoder layers in the transformer.
 
-Decoder layer
+# Decoder layer
 Each decoder layer consists of sublayers:
 
-Masked multi-head attention (with look ahead mask and padding mask)
-Multi-head attention (with padding mask). V (value) and K (key) receive the encoder output as inputs. Q (query) receives the output from the masked multi-head attention sublayer.
-Point wise feed forward networks
-Each of these sublayers has a residual connection around it followed by a layer normalization. The output of each sublayer is LayerNorm(x + Sublayer(x)). The normalization is done on the d_model (last) axis.
-
-There are N decoder layers in the transformer.
+1. Masked multi-head attention (with look ahead mask and padding mask).
+2. Multi-head attention (with padding mask). V (value) and K (key) receive the encoder output as inputs. Q (query) receives the output from the masked multi-head attention sublayer.
+3. Point wise feed forward networks.
+Each of these sublayers has a residual connection around it followed by a layer normalization. The output of each sublayer is LayerNorm(x + Sublayer(x)). The normalization is done on the d_model (last) axis. There are N decoder layers in the transformer.  
 
 As Q receives the output from decoder's first attention block, and K receives the encoder output, the attention weights represent the importance given to the decoder's input based on the encoder's output. In other words, the decoder predicts the next word by looking at the encoder output and self-attending to its own output. See the demonstration above in the scaled dot product attention section.
 
 
-Encoder
+# Encoder
 The Encoder consists of:
 
-Input Embedding
-Positional Encoding
-N encoder layers
-The input is put through an embedding which is summed with the positional encoding. The output of this summation is the input to the encoder layers. The output of the encoder is the input to the decoder.
+1. Input Embedding
+2. Positional Encoding
+3. N encoder layers
+4. The input is put through an embedding which is summed with the positional encoding. The output of this summation is the input to the encoder layers. The output of the encoder is the input to the decoder.
 
-Decoder
+# Decoder
 The Decoder consists of:
 
-Output Embedding
-Positional Encoding
-N decoder layers
-The target is put through an embedding which is summed with the positional encoding. The output of this summation is the input to the decoder layers. The output of the decoder is the input to the final linear layer.
+1. Output Embedding
+2. Positional Encoding
+3. N decoder layers
+4. The target is put through an embedding which is summed with the positional encoding. The output of this summation is the input to the decoder layers. The output of the decoder is the input to the final linear layer.
 
-Create the Transformer
+# Create the Transformer
 Transformer consists of the encoder, decoder and a final linear layer. The output of the decoder is the input to the linear layer and its output is returned.
 
-Evaluate
+# Evaluate
 The following steps are used for evaluation:
 
-Encode the input sentence using the Portuguese tokenizer (tokenizer_pt). Moreover, add the start and end token so the input is equivalent to what the model is trained with. This is the encoder input.
-The decoder input is the start token == tokenizer_en.vocab_size.
-Calculate the padding masks and the look ahead masks.
-The decoder then outputs the predictions by looking at the encoder output and its own output (self-attention).
-Select the last word and calculate the argmax of that.
-Concatentate the predicted word to the decoder input as pass it to the decoder.
-In this approach, the decoder predicts the next word based on the previous words it predicted.
+1. Encode the input sentence using the Portuguese tokenizer. Moreover, add the start and end token so the input is equivalent to what the model is trained with. This is the encoder input.
+2. The decoder input is the start token.
+3. Calculate the padding masks and the look ahead masks.
+4. The decoder then outputs the predictions by looking at the encoder output and its own output (self-attention).
+5. Select the last word and calculate the argmax of that.
+6. Concatentate the predicted word to the decoder input as pass it to the decoder.
+7. In this approach, the decoder predicts the next word based on the previous words it predicted.
