@@ -32,3 +32,21 @@ The tokenizer encodes the string by breaking it into subwords if the word is not
 13 ----> is   
 2799 ----> awesome  
 7877 ----> .  
+
+Positional encoding
+Positional encoding is added to give the model some information about the relative position of the words in the sentence. The positional encoding vector is added to the embedding vector. Embeddings represent a token in a d-dimensional space where tokens with similar meaning will be closer to each other. But the embeddings do not encode the relative position of words in a sentence. So after adding the positional encoding, words will be closer to each other based on the similarity of their meaning and their position in the sentence, in the d-dimensional space.  
+
+Masking
+Mask all the pad tokens in the batch of sequence. It ensures that the model does not treat padding as the input. The mask indicates where pad value 0 is present: it outputs a 1 at those locations, and a 0 otherwise.
+
+Scaled dot product attention
+ 
+ ![alt text](https://github.com/MedentzidisCharalampos/Portugese-to-English-Translation-using-Transformer-Model/blob/main/scaled_attention.png)  
+ 
+ The attention function used by the transformer takes three inputs: Q (query), K (key), V (value).
+ 
+ The dot-product attention is scaled by a factor of square root of the depth. This is done because for large values of depth, the dot product grows large in magnitude pushing the softmax function where it has small gradients resulting in a very hard softmax.
+
+For example, consider that Q and K have a mean of 0 and variance of 1. Their matrix multiplication will have a mean of 0 and variance of dk. Hence, square root of dk is used for scaling (and not any other number) because the matmul of Q and K should have a mean of 0 and variance of 1, and you get a gentler softmax.
+
+The mask is multiplied with -1e9 (close to negative infinity). This is done because the mask is summed with the scaled matrix multiplication of Q and K and is applied immediately before a softmax. The goal is to zero out these cells, and large negative inputs to softmax are near zero in the output.
