@@ -20,7 +20,8 @@ We use TFDS (https://www.tensorflow.org/datasets) to load the Portugese-English 
 
 This dataset contains approximately 50000 training examples, 1100 validation examples, and 2000 test examples.
 
-The training dataset is tokenized using sub-words. For example:  
+The training dataset is tokenized using sub-words. 
+An Example:  
 Tokenized string is [7915, 1248, 7946, 7194, 13, 2799, 7877]  
 The original string: Transformer is awesome.  
 The tokenizer encodes the string by breaking it into subwords if the word is not in its dictionary.  
