@@ -1,4 +1,4 @@
-# Portugest-to-English-Translation
+# Portugese-to-English-Translation
 A transformer model is trained to translate Portugese to English
 
 The core idea behind the Transformer model is self-attention—the ability to attend to different positions of the input sequence to compute a representation of that sequence. Transformer creates stacks of self-attention layers.
