@@ -69,15 +69,17 @@ Multi-head attention consists of four parts:
 
 Instead of one single attention head, Q, K, and V are split into multiple heads because it allows the model to jointly attend to information at different positions from different representational spaces. After the split each head has a reduced dimensionality, so the total computation cost is the same as a single head attention with full dimensionality.
 
-Point wise feed forward network
+# Point wise feed forward network
 
 Point wise feed forward network consists of two fully-connected layers with a ReLU activation in between.
 
 
 # Encoder and decoder
 
-![alt text](https://github.com/MedentzidisCharalampos/Portugese-to-English-Translation-using-Transformer-Model/blob/main/scaled_attention.png)  
 
+![alt text](https://github.com/MedentzidisCharalampos/Portugese-to-English-Translation-using-Transformer-Model/blob/main/transformer.png)  
+
+The transformer model: 
 1. The input sentence is passed through N encoder layers that generates an output for each word/token in the sequence.
 2. The decoder attends on the encoder's output and its own input (self-attention) to predict the next word.
 
