@@ -20,14 +20,14 @@ We use TFDS (https://www.tensorflow.org/datasets) to load the Portugese-English 
 
 This dataset contains approximately 50000 training examples, 1100 validation examples, and 2000 test examples.
 
-The training dataset is tokenized using sub-words. For example:
-Tokenized string is [7915, 1248, 7946, 7194, 13, 2799, 7877]
-The original string: Transformer is awesome.
-The tokenizer encodes the string by breaking it into subwords if the word is not in its dictionary.
-7915 ----> T
-1248 ----> ran
-7946 ----> s
-7194 ----> former 
-13 ----> is 
-2799 ----> awesome
-7877 ----> .
+The training dataset is tokenized using sub-words. For example:  
+Tokenized string is [7915, 1248, 7946, 7194, 13, 2799, 7877]  
+The original string: Transformer is awesome.  
+The tokenizer encodes the string by breaking it into subwords if the word is not in its dictionary.  
+7915 ----> T  
+1248 ----> ran  
+7946 ----> s  
+7194 ----> former   
+13 ----> is   
+2799 ----> awesome  
+7877 ----> .  
